@@ -8,4 +8,4 @@
 
 ## How to use
 
-Clone repository with command in your terminal: `http`
+Clone repository with command in your terminal: `git clone https://github.com/GBShadow/saveHeroes`
