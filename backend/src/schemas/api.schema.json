@@ -1,0 +1,343 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "version": "1.0.0",
+    "title": "Save Heroes",
+    "description": "Save your favorites heroes",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "gbs.shadow@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3333/",
+      "description": "Local server"
+    }
+  ],
+  "paths": {
+    "/heroes ": {
+      "post": {
+        "description": "Create a new hero",
+        "operationId": "createHero",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Hero"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "The hero has been created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HeroCreatedResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Invalid parameters",
+                  "code": "400",
+                  "error": "Bad Request"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/heroes": {
+      "get": {
+        "description": "List all heroes",
+        "operationId": "getHeroes",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The list of heroes has been returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HeroListResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Hero not found",
+                  "code": "404",
+                  "error": "Not Found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/heroes/:id": {
+      "get": {
+        "description": "Show a hero using id",
+        "operationId": "showHeroes",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "$ref": "#/components/schemas/id"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The show a hero has been returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HeroCreatedResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Hero not found",
+                  "code": "404",
+                  "error": "Not Found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/heroes/:id ": {
+      "put": {
+        "description": "Update a hero using id",
+        "operationId": "updateHeroes",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "$ref": "#/components/schemas/id"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Hero"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated a hero has been returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HeroCreatedResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Hero not found",
+                  "code": "404",
+                  "error": "Not Found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/heroes/:id  ": {
+      "delete": {
+        "description": "Show a hero using id",
+        "operationId": "showHeroes",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "$ref": "#/components/schemas/id"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content",
+            "content": {}
+          },
+          "404": {
+            "description": "Not Found!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Hero not found",
+                  "code": "404",
+                  "error": "Not Found"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "id": {
+        "type": "integer",
+        "example": "1"
+      },
+      "name": {
+        "type": "string",
+        "example": "Batman"
+      },
+      "short_description": {
+        "type": "string",
+        "example": "Herói da DC comics"
+      },
+      "complete_description": {
+        "type": "string",
+        "example": "Batman opera na cidade fictícia de Gotham City, e é ajudado por outros personagens incluindo o seu mordomo Alfred Pennyworth, o comissário da policia Jim Gordon, e outros aliados vigilantes como Robin."
+      },
+      "url_image": {
+        "type": "string",
+        "example": "https://assets.b9.com.br/wp-content/uploads/2020/09/Batman-issue86-heder-1280x677.jpg"
+      },
+      "Hero": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/name"
+          },
+          "short_description": {
+            "$ref": "#/components/schemas/short_description"
+          },
+          "complete_description": {
+            "$ref": "#/components/schemas/complete_description"
+          },
+          "url_image": {
+            "$ref": "#/components/schemas/url_image"
+          }
+        }
+      },
+      "HeroCreatedResponse": {
+        "type": "object",
+        "properties": {
+          "hero": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "#/components/schemas/id"
+              },
+              "name": {
+                "$ref": "#/components/schemas/name"
+              },
+              "short_description": {
+                "$ref": "#/components/schemas/short_description"
+              },
+              "complete_description": {
+                "$ref": "#/components/schemas/complete_description"
+              },
+              "url_image": {
+                "$ref": "#/components/schemas/url_image"
+              }
+            }
+          }
+        }
+      },
+      "HeroListResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/components/schemas/id"
+            },
+            "name": {
+              "$ref": "#/components/schemas/name"
+            },
+            "short_description": {
+              "$ref": "#/components/schemas/short_description"
+            },
+            "complete_description": {
+              "$ref": "#/components/schemas/complete_description"
+            },
+            "url_image": {
+              "$ref": "#/components/schemas/url_image"
+            }
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "code": {
+            "type": "number"
+          },
+          "error": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "documentation": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -9,6 +9,7 @@
     "baseUrl": "./src",
     "allowJs": true,
     "esModuleInterop": true ,
+    "resolveJsonModule": true,
     "experimentalDecorators": true ,
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true

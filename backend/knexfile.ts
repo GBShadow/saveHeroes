@@ -1,6 +1,6 @@
-import knex from 'knex';
+import path from 'path';
 
-const db = knex({
+module.exports = {
   client: 'mysql2',
   connection: {
     port: 41890,
@@ -9,7 +9,8 @@ const db = knex({
     password: 'gustavoMAKTUB2021',
     database: 'testegustavo',
   },
+  migrations: {
+    directory: path.resolve(__dirname, 'src', 'database', 'migrations'),
+  },
   useNullAsDefault: true,
-});
-
-export default db;
+};
