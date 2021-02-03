@@ -54,7 +54,7 @@
                   "$ref": "#/components/schemas/Error"
                 },
                 "example": {
-                  "message": "Invalid parameters",
+                  "message": "Hero are ready existing",
                   "code": "400",
                   "error": "Bad Request"
                 }

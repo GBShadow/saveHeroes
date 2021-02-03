@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import AppError from '../errors/AppError';
 import db from '../database/connection';
 
 export default class HeroesController {
@@ -11,20 +12,24 @@ export default class HeroesController {
         url_image,
       } = request.body;
 
-      const trx = await db.transaction();
+      const heroExisting = await db('heroes')
+        .select('*')
+        .where('heroes.name', '=', name);
 
-      const hero_id = await trx('heroes').insert({
+      if (heroExisting.length) {
+        throw new AppError('Hero are ready existing');
+      }
+
+      const hero_id = await db('heroes').insert({
         name,
         short_description,
         complete_description,
         url_image,
       });
 
-      const hero = await trx('heroes')
+      const hero = await db('heroes')
         .select('*')
         .where('heroes.id', '=', hero_id[0]);
-
-      await trx.commit();
 
       return response.status(201).json(hero);
     } catch (err) {
@@ -50,6 +55,10 @@ export default class HeroesController {
         .select('*')
         .where('heroes.id', '=', hero_id);
 
+      if (!hero.length) {
+        throw new AppError('Hero not found');
+      }
+
       return response.status(200).json(hero);
     } catch (err) {
       return response.status(400).json({ error: err.message });
@@ -66,9 +75,15 @@ export default class HeroesController {
         url_image,
       } = request.body;
 
-      const trx = await db.transaction();
+      const hero = await db('heroes')
+        .select('*')
+        .where('heroes.id', '=', hero_id);
 
-      await trx('heroes')
+      if (!hero.length) {
+        throw new AppError('Hero not found');
+      }
+
+      await db('heroes')
         .update({
           name,
           short_description,
@@ -77,11 +92,9 @@ export default class HeroesController {
         })
         .where('heroes.id', '=', hero_id);
 
-      const heroes = await trx('heroes')
+      const heroes = await db('heroes')
         .select('*')
         .where('heroes.id', '=', hero_id);
-
-      await trx.commit();
 
       return response.status(200).json(heroes);
     } catch (err) {
@@ -92,6 +105,14 @@ export default class HeroesController {
   public async delete(request: Request, response: Response): Promise<Response> {
     try {
       const hero_id = request.params.id;
+
+      const hero = await db('heroes')
+        .select('*')
+        .where('heroes.id', '=', hero_id);
+
+      if (!hero.length) {
+        throw new AppError('Hero not found');
+      }
 
       await db('heroes').where('heroes.id', '=', hero_id).del();
 
