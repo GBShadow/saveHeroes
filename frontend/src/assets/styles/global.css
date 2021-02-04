@@ -27,13 +27,18 @@
   box-sizing: border-box;
 }
 
-  html, body, #root {
-    height: 100vh;
-  }
+html,
+body,
+#root {
+  height: 100vh;
+}
 
-  body {
-    background: var(--color-background);
-  }
+body {
+  background-image: url('../../assets/images/background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 
 #root {
   display: flex;
@@ -41,9 +46,11 @@
   justify-content: center;
 }
 
-body, input, button, textarea {
-  font: 500 1.6rem Poppins;
-  color: var(--color-text-base)
+body,
+input,
+button,
+textarea {
+  font: 500 1.6rem Roboto;
 }
 
 .container {
