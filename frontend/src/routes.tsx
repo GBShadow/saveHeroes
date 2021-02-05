@@ -9,7 +9,7 @@ const Routes: React.FC = () => {
   return (
     <BrowserRouter>
       <Route path="/" exact component={Landing} />
-      <Route path="/hero" component={Hero} />
+      <Route path="/hero/:id" component={Hero} />
       <Route path="/save-hero" component={SaveHero} />
       <Route path="/find-heroes" component={FindHeroes} />
     </BrowserRouter>

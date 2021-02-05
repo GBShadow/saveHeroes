@@ -16,12 +16,11 @@ interface Hero {
 
 const FindHeroes: React.FC = () => {
   const [heroes, setHeroes] = useState<Hero[]>([]);
-
   useEffect(() => {
     api.get('/heroes').then(response => {
       setHeroes(response.data);
     });
-  }, [heroes]);
+  }, []);
 
   return (
     <div id="page-find-heroes">
@@ -37,20 +36,22 @@ const FindHeroes: React.FC = () => {
 
       <main>
         <div className="content-container">
-          {heroes.map(hero => (
-            <div className="hero-container">
-              <div className="avatar-container">
-                <img src={hero.url_image} alt={hero.name} />
+          {heroes.map(hero => {
+            return (
+              <div className="hero-container" key={hero.id}>
+                <div className="avatar-container">
+                  <img src={hero.url_image} alt={hero.name} />
+                </div>
+                <strong>{hero.name}</strong>
+                <span>{hero.short_description}</span>
+                <div className="button-container">
+                  <Link to={`/hero/${hero.id}`} className="hero-button">
+                    Ver sobre o herói
+                  </Link>
+                </div>
               </div>
-              <strong>{hero.name}</strong>
-              <span>{hero.short_description}</span>
-              <div className="button-container">
-                <Link to={`/hero/${hero.id}`} className="hero-button">
-                  Ver sobre o herói
-                </Link>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         <div className="buttons-container">
           <button type="button" className="page-button">

@@ -17,7 +17,7 @@ interface Hero {
 interface MatchParams {
   match: {
     params: {
-      id: number;
+      id: string;
     };
   };
 }
@@ -26,13 +26,15 @@ const Hero: React.FC<MatchParams> = ({ match }) => {
   const [hero, setHero] = useState<Hero>({} as Hero);
 
   const { id } = match.params;
+  console.log('Hero', hero);
 
   useEffect(() => {
-    api.get(`/heroes/${id}`).then(response => {
-      console.log(response.data);
-      setHero(response.data);
-    });
-  }, [hero]);
+    async function load(): Promise<void> {
+      const response = await api.get(`/heroes/${id}`);
+      setHero(...response.data);
+    }
+    load();
+  }, [id]);
 
   return (
     <div id="page-hero">
