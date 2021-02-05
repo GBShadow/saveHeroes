@@ -1,0 +1,26 @@
+.textarea-block {
+  position: relative;
+}
+
+.input-block + .textarea-block {
+  margin-top: 1.7rem;
+}
+
+.textarea-block label {
+  font: 700 1.7rem Roboto;
+}
+
+.textarea-block textarea {
+  width: 100%;
+  height: 16rem;
+  margin-top: 0.8rem;
+  min-height: 8rem;
+  border-radius: 0.8rem;
+  background: var(--color-input-background);
+  border: 3px solid #000;
+  outline: 0;
+  resize: vertical;
+  padding: 1.2rem 1.6rem;
+  font: 700 1.6rem Roboto;
+}
+
