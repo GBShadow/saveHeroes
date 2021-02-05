@@ -26,6 +26,7 @@
   "rules": {
     "react/jsx-props-no-spreading": "off",
     "camelcase": "off",
+    "no-alert": "off",
     "react/prop-types": "off",
     "no-use-before-define": "off",
     "prettier/prettier": "error",

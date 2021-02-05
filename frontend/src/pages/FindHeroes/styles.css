@@ -70,7 +70,7 @@
 .hero-container {
   display: flex;
   flex-direction: column;
-  width: 35rem;
+  width: 100%;
   background: #fff;
   border-radius: 0.8rem;
   border: 5px solid #000;
@@ -124,7 +124,7 @@
   text-shadow: 3px 3px 1px rgba(0, 0, 0, 1);
 }
 
-.buttons-container .page-number span{
+.buttons-container .page-number span {
   font-size: 2.6rem;
 }
 
@@ -148,11 +148,66 @@
 }
 
 .buttons-container button.page-button {
-
   background: #04d361;
   border: 5px solid #000;
 }
 
 .buttons-container button.page-button:hover {
   background: #04bf58;
+}
+
+@media (max-width: 980px) {
+  #page-find-heroes {
+    width: 80vw;
+  }
+
+  .content-container {
+    display: block;
+  }
+
+  .button-container a.hero-button {
+    font-size: 3.6rem;
+  }
+
+  .hero-container {
+    margin-top: 2rem;
+  }
+
+  .hero-container strong {
+    font-size: 3.6rem;
+  }
+}
+
+@media (max-width: 440px) {
+  #page-find-heroes {
+    width: 80vw;
+  }
+
+  .content-container {
+    display: block;
+  }
+
+  .button-container a.hero-button {
+    font-size: 2.8rem;
+  }
+
+  .hero-container {
+    margin-top: 2rem;
+  }
+
+  .hero-container strong {
+    font-size: 2.8rem;
+  }
+
+  .buttons-container button {
+    width: 10rem;
+    height: 5rem;
+    font-size: 1.8rem;
+  }
+
+  .buttons-container .page-number {
+    width: 5rem;
+    height: 5rem;
+    font-size: 1.8rem;
+  }
 }

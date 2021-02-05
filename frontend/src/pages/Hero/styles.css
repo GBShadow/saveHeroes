@@ -16,7 +16,8 @@
   display: flex;
   margin: 0 auto;
   flex-direction: row;
-  width: 60%;
+  width: 85vw;
+  height: 70vh;
   background: #fff;
   border-radius: 0.8rem;
   border: 5px solid #000;
@@ -29,8 +30,58 @@
   max-width: 100%;
   max-height: 100%;
   border: 5px solid #000;
-  width: 40rem;
+  width: 100%;
   height: 35rem;
+}
+
+.hero-avatar-container .buttons-container-hero {
+  display: flex;
+  margin: 0.3rem 0;
+  justify-content: space-between;
+}
+
+.hero-avatar-container .buttons-container-hero button {
+  width: 100%;
+  height: 7rem;
+  border-radius: 0.8rem;
+  border: 5px solid #000;
+  padding: 0 0.6rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 2.6rem Roboto;
+  color: var(--color-box-base);
+  text-shadow: 3px 3px 1px rgba(0, 0, 0, 1);
+
+  transition: background-color 0.2s;
+}
+
+.hero-avatar-container .buttons-container-hero button a {
+  text-decoration: none;
+  font: 700 2.6rem Roboto;
+  color: var(--color-box-base);
+  text-shadow: 3px 3px 1px rgba(0, 0, 0, 1);
+}
+
+.hero-avatar-container .buttons-container-hero button + button {
+  margin-left: 0.3rem;
+}
+
+.hero-avatar-container .buttons-container-hero button.edit {
+  background-color: #2339fc;
+}
+
+.hero-avatar-container .buttons-container-hero button.edit:hover {
+  background-color: #0b1fd4;
+}
+
+.hero-avatar-container .buttons-container-hero button.delete {
+  background-color: #fc2323;
+}
+
+.hero-avatar-container .buttons-container-hero button.delete:hover {
+  background-color: #b60707;
 }
 
 .hero-container .text-content {
@@ -69,4 +120,26 @@
   margin-top: 0.6rem;
   font-size: 1.6rem;
   font-weight: 900;
+}
+
+@media(max-width: 810px) {
+  .hero-content-container .hero-container  {
+    display: block;
+    height: 100%;
+  }
+
+  .hero-avatar-container img {
+    height: 30%;
+  }
+
+  .hero-container .text-content {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+  }
+
+  .hero-container .text-content p {
+    font-size: 1.8rem;
+    font-weight: 400;
+  }
 }

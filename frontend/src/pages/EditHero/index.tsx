@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import Input from '../../components/Input';
@@ -9,31 +9,74 @@ import logoImg from '../../assets/images/logo.png';
 import './styles.css';
 import api from '../../services/api';
 
-const SaveHero: React.FC = () => {
+interface Hero {
+  id: number;
+  name: string;
+  short_description: string;
+  complete_description: string;
+  url_image: string;
+}
+
+interface MatchParams {
+  match: {
+    params: {
+      id: string;
+    };
+  };
+}
+
+const SaveHero: React.FC<MatchParams> = ({ match }) => {
   const history = useHistory();
 
+  const { id } = match.params;
+
+  const [hero, setHero] = useState<Hero>({} as Hero);
   const [name, setName] = useState('');
   const [shortDescription, setShortDescription] = useState('');
   const [completeDescription, setCompleteDescription] = useState('');
   const [urlImage, setUrlImage] = useState('');
 
+  useEffect(() => {
+    async function load(): Promise<void> {
+      const response = await api.get(`/heroes/${id}`);
+      console.log(response.data);
+      setHero(...response.data);
+    }
+    load();
+  }, [id]);
+
+  useEffect(() => {
+    async function load(): Promise<void> {
+      setName(hero.name);
+      setShortDescription(hero.short_description);
+      setCompleteDescription(hero.complete_description);
+      setUrlImage(hero.url_image);
+    }
+    load();
+  }, [
+    hero.name,
+    hero.short_description,
+    hero.complete_description,
+    hero.url_image,
+  ]);
+
   function handleSaveHero(e: FormEvent): void {
     e.preventDefault();
 
     api
-      .post('heroes', {
+      .put(`heroes/${id}`, {
         name,
         short_description: shortDescription,
         complete_description: completeDescription,
         url_image: urlImage,
       })
       .then(() => {
-        alert('Cadastro realizado com sucesso!');
+        alert('Edição realizada com sucesso!');
 
-        history.push('/');
+        history.goBack();
       })
       .catch(() => {
-        alert('Erro no cadastro!');
+        alert('Erro na edição!');
       });
   }
 
@@ -46,7 +89,7 @@ const SaveHero: React.FC = () => {
       <main>
         <form onSubmit={handleSaveHero}>
           <fieldset>
-            <legend>Dados do Herói</legend>
+            <legend>Edição de dados do herói</legend>
             <Input
               name="name"
               label="Nome do herói"
@@ -74,8 +117,8 @@ const SaveHero: React.FC = () => {
           </fieldset>
 
           <footer>
-            <button type="submit">Salvar Herói</button>
-            <Link to="/">Voltar</Link>
+            <button type="submit">Atualizar Herói</button>
+            <Link to="/find-heroes">Voltar</Link>
           </footer>
         </form>
       </main>
