@@ -9,7 +9,7 @@
 ## How to use
 
 Clone repository with command in your terminal: `git clone https://github.com/GBShadow/saveHeroes`
-enter in folder and using `npm install` or `yarn install` for download dependencies,
+enter in folder **backend** and using `npm install` or `yarn install` for download dependencies,
 after run with `npm run dev` or `yarn dev`, your application started in port 3333.
 
 ## Using API

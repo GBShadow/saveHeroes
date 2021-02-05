@@ -24,7 +24,6 @@ const FindHeroes: React.FC = () => {
     });
   }, [page]);
 
-  console.log('length', heroes.length);
   const nextPage = useCallback(() => {
     if (heroes.length < 9) {
       setPage(page);
