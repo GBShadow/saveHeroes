@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import logoImg from '../../assets/images/logo.png';
@@ -16,11 +16,25 @@ interface Hero {
 
 const FindHeroes: React.FC = () => {
   const [heroes, setHeroes] = useState<Hero[]>([]);
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
-    api.get('/heroes').then(response => {
+    api.get(`/heroes?page=${page}`).then(response => {
       setHeroes(response.data);
     });
-  }, []);
+  }, [page]);
+
+  const nextPage = useCallback(() => {
+    setPage(page + 1);
+  }, [page]);
+
+  const previousPage = useCallback(() => {
+    if (page === 1) {
+      setPage(1);
+      return;
+    }
+    setPage(page - 1);
+  }, [page]);
 
   return (
     <div id="page-find-heroes">
@@ -54,13 +68,13 @@ const FindHeroes: React.FC = () => {
           })}
         </div>
         <div className="buttons-container">
-          <button type="button" className="page-button">
+          <button type="button" onClick={previousPage} className="page-button">
             Anterior
           </button>
           <div className="page-number">
-            <span>1</span>
+            <span>{page}</span>
           </div>
-          <button type="button" className="page-button">
+          <button type="button" onClick={nextPage} className="page-button">
             Próxima
           </button>
         </div>

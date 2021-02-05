@@ -40,10 +40,10 @@ const SaveHero: React.FC<MatchParams> = ({ match }) => {
     async function load(): Promise<void> {
       const response = await api.get(`/heroes/${id}`);
       console.log(response.data);
-      setHero(...response.data);
+      setHero({ ...hero, ...response.data });
     }
     load();
-  }, [id]);
+  }, [id, hero]);
 
   useEffect(() => {
     async function load(): Promise<void> {
