@@ -39,7 +39,12 @@ export default class HeroesController {
 
   public async index(request: Request, response: Response): Promise<Response> {
     try {
-      const heroes = await db('heroes').select('*');
+      const { page = 1 } = request.query;
+
+      const heroes = await db('heroes')
+        .limit(9)
+        .offset((Number(page) - 1) * 9)
+        .select('*');
 
       return response.status(200).json(heroes);
     } catch (err) {
