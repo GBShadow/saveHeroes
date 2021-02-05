@@ -21,7 +21,7 @@
   text-align: center;
   line-height: 4.6rem;
   margin-top: 8rem;
-  color: #fff;
+  color: var(--color-box-base);
   text-shadow: 4px 3px 2px rgba(0, 0, 0, 1);
 }
 
@@ -45,7 +45,7 @@
   text-decoration: none;
   text-align: center;
 
-  color: #fff;
+  color: var(--color-box-base);
   text-shadow: 3px 3px 1px rgba(0, 0, 0, 1);
   transition: background-color 0.2s;
 }
@@ -54,28 +54,22 @@
   margin-right: 1.6rem;
 }
 
-.buttons-container a img {
-  width: 4rem;
-  margin-right: 2.4rem;
-  margin-left: 0.6rem;
-}
-
 .buttons-container a.save-heroes {
-  background: #019AD0;
+  background: var(--color-primary-lighter);
   border: 5px solid #000;
 }
 
 .buttons-container a.find-heroes {
-  background: #FEAE02;
+  background: var(--color-secondary);
   border: 5px solid #000;
 }
 
 .buttons-container a.save-heroes:hover {
-  background: #0175D0;
+  background: var(--color-primary-light);
 }
 
 .buttons-container a.find-heroes:hover {
-  background: #FE9902;
+  background: var(--color-secondary-dark);
 }
 
 @media (min-width: 700px) {
