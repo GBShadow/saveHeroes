@@ -24,17 +24,17 @@ interface MatchParams {
 
 const Hero: React.FC<MatchParams> = ({ match }) => {
   const history = useHistory();
-  const [hero, setHero] = useState<Hero>({} as Hero);
+  const [hero, setHero] = useState({} as Hero);
 
   const { id } = match.params;
 
   useEffect(() => {
     async function load(): Promise<void> {
       const response = await api.get(`/heroes/${id}`);
-      setHero({ ...hero, ...response.data });
+      setHero(response.data[0]);
     }
     load();
-  }, [id, hero]);
+  }, [id]);
 
   const deleteItem = useCallback(
     (hero_id: number) => {

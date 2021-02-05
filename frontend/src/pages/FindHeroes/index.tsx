@@ -24,9 +24,15 @@ const FindHeroes: React.FC = () => {
     });
   }, [page]);
 
+  console.log('length', heroes.length);
   const nextPage = useCallback(() => {
+    if (heroes.length < 9) {
+      setPage(page);
+
+      return;
+    }
     setPage(page + 1);
-  }, [page]);
+  }, [page, heroes]);
 
   const previousPage = useCallback(() => {
     if (page === 1) {

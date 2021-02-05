@@ -39,8 +39,7 @@ const SaveHero: React.FC<MatchParams> = ({ match }) => {
   useEffect(() => {
     async function load(): Promise<void> {
       const response = await api.get(`/heroes/${id}`);
-      console.log(response.data);
-      setHero({ ...hero, ...response.data });
+      setHero(response.data[0]);
     }
     load();
   }, [id, hero]);
