@@ -1,13 +1,13 @@
 import knex from 'knex';
 
 const db = knex({
-  client: 'mysql2',
+  client: 'postgres',
   connection: {
-    port: 41890,
-    host: 'mysql742.umbler.com',
-    user: 'testegustavo',
-    password: 'gustavoMAKTUB2021',
-    database: 'testegustavo',
+    port: 5432,
+    host: 'localhost',
+    user: 'postgres',
+    password: 'docker',
+    database: 'saveheros_db',
   },
   useNullAsDefault: true,
 });

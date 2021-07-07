@@ -16,22 +16,18 @@ export default class HeroesController {
         .select('*')
         .where('heroes.name', '=', name);
 
-      if (heroExisting.length) {
+      if (heroExisting.length !== 0) {
         throw new AppError('Hero are ready existing');
       }
 
-      const hero_id = await db('heroes').insert({
+      await db('heroes').insert({
         name,
         short_description,
         complete_description,
         url_image,
       });
 
-      const hero = await db('heroes')
-        .select('*')
-        .where('heroes.id', '=', hero_id[0]);
-
-      return response.status(201).json(hero);
+      return response.status(201).json();
     } catch (err) {
       return response.status(400).json({ error: err.message });
     }

@@ -42,7 +42,7 @@ const SaveHero: React.FC<MatchParams> = ({ match }) => {
       setHero(response.data[0]);
     }
     load();
-  }, [id, hero]);
+  }, []);
 
   useEffect(() => {
     async function load(): Promise<void> {
@@ -59,24 +59,22 @@ const SaveHero: React.FC<MatchParams> = ({ match }) => {
     hero.url_image,
   ]);
 
-  function handleSaveHero(e: FormEvent): void {
+  async function handleSaveHero(e: FormEvent): Promise<void> {
     e.preventDefault();
 
-    api
-      .put(`heroes/${id}`, {
+    try {
+      await api.put(`heroes/${id}`, {
         name,
         short_description: shortDescription,
         complete_description: completeDescription,
         url_image: urlImage,
-      })
-      .then(() => {
-        alert('Edição realizada com sucesso!');
-
-        history.goBack();
-      })
-      .catch(() => {
-        alert('Erro na edição!');
       });
+      alert('Edição realizada com sucesso!');
+
+      history.goBack();
+    } catch {
+      alert('Erro na edição!');
+    }
   }
 
   return (

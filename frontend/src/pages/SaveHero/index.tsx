@@ -17,24 +17,22 @@ const SaveHero: React.FC = () => {
   const [completeDescription, setCompleteDescription] = useState('');
   const [urlImage, setUrlImage] = useState('');
 
-  function handleSaveHero(e: FormEvent): void {
+  async function handleSaveHero(e: FormEvent): Promise<void> {
     e.preventDefault();
 
-    api
-      .post('heroes', {
+    try {
+      await api.post('heroes', {
         name,
         short_description: shortDescription,
         complete_description: completeDescription,
         url_image: urlImage,
-      })
-      .then(() => {
-        alert('Cadastro realizado com sucesso!');
-
-        history.push('/');
-      })
-      .catch(() => {
-        alert('Erro no cadastro!');
       });
+      alert('Cadastro realizado com sucesso!');
+
+      history.push('/find-heroes');
+    } catch {
+      alert('Erro no cadastro!');
+    }
   }
 
   return (

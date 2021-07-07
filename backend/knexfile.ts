@@ -1,13 +1,13 @@
 import path from 'path';
 
 module.exports = {
-  client: 'mysql2',
+  client: 'postgres',
   connection: {
-    port: 41890,
-    host: 'mysql742.umbler.com',
-    user: 'testegustavo',
-    password: 'gustavoMAKTUB2021',
-    database: 'testegustavo',
+    port: 5432,
+    host: 'localhost',
+    user: 'postgres',
+    password: 'docker',
+    database: 'saveheros_db',
   },
   migrations: {
     directory: path.resolve(__dirname, 'src', 'database', 'migrations'),
